@@ -1,0 +1,11 @@
+.survey-btn{
+  text-align: center;
+  width:40px;
+  font-size: 2em;
+  padding:0;
+}
+.btn-group{
+  display:grid;
+  // gap:1vw;
+  grid-template-columns: repeat(5, 1fr);
+}

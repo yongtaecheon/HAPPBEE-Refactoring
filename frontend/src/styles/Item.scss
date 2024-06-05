@@ -1,0 +1,20 @@
+.item-group{
+  max-width: 100vw;
+  display:flex;
+  overflow-x: scroll;
+  .item-img {
+    border: 1px solid #ccc;
+    border-radius: 25px;
+  }
+}
+
+.img-btn {
+  padding: 0;
+  width:200px;
+  background-color: #ffffff00;
+  border-radius: 25px;
+}
+
+.img-cat{
+  margin:0;
+}

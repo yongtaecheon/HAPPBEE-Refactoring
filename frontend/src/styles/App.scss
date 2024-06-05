@@ -1,0 +1,81 @@
+@import './palette.scss';
+
+body {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  margin:0;
+  height: 100vh;
+  // overflow: hidden;
+  background-color: $white;
+  font-size: clamp(12px, calc(0.26vw + 11.08px), 16px); //360px view: 12px / 1920px view: 16px
+  // font-size: 16px;
+}
+
+#root{
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  color: $black;
+  font-style: normal;
+  display:flex;
+  flex-direction: column;
+  max-width:768px;
+  max-height:932px;
+  width:100vw;
+  height:100vh;
+}
+
+main{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  height: 100%;
+  width:100%;
+  overflow: scroll;
+  // padding-block:10vh;
+}
+
+section{
+  height:100%;
+}
+
+button{
+  font-family: "IBM Plex Sans KR", sans-serif;
+  border: 0;
+  background-color: $black;
+  color: $white;
+  margin:1vh;
+  padding-block: 1vh;
+  border-radius: 10px;
+  font-size: 1rem;
+  width:150px;
+  // text-wrap: nowrap;
+}
+button:hover {
+  background-color: #205bc9;
+  transition: 0.3s;
+}
+img{
+  width: 100%;
+}
+
+.spinner {
+  margin-inline: 10px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: rgb(151, 151, 151);
+  animation: spinner-grow 0.5s linear infinite;
+}
+
+@media screen and (min-width: 768px) and (min-height: 932px) {
+  body{
+    background-color: #ebdbb5;
+  }
+  #root{
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 1px 1px 10px #c3baa9;
+  }
+}

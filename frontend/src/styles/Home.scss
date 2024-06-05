@@ -1,0 +1,63 @@
+@import './palette.scss';
+
+progress {
+  width: 100%;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 25px;
+  height:30px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-value {
+  background-color: #e87212;
+}
+
+.box-container{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1vw;
+  padding: 3vw;
+  .box:nth-child(1){
+    background-color: white;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    h1,h2{
+      margin:0;
+    }
+  }
+  .box:nth-child(2){
+    background-color: #2b2653;
+    color:white;
+    padding: 2em;
+    grid-column-start:1;
+    grid-column-end:3;
+    strong{
+      font-size:16px;
+    }
+  }
+  .box:nth-child(3){
+    padding-top: 1em;
+    background-color: $orange;
+  }
+  .box:nth-child(4) {
+    padding-top: 1em;
+    background-color: $red;
+  }
+}
+
+.box{
+  box-shadow: 1px 1px 5px #0000005c;
+  padding: 2em;
+  border-radius: 50px;
+  margin-inline: 1vw;
+  strong{
+    font-size: 50px;
+  }
+  h1, h2{
+    font-weight: 500;
+  }
+}
