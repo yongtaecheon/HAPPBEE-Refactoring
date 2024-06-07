@@ -111,10 +111,10 @@ export const scoreMean = [
   {
     "age": "20",
     "total": "52",
-    "life_satisfaction": "58",
-    "meaning_of_life": "55",
-    "stress": "60",
-    "emotional_balance": "53"
+    "life_satisfaction": "58", //삶의 만족도
+    "meaning_of_life": "55", //관계
+    "stress": "60", //자유
+    "emotional_balance": "53" //감정
   },
   {
     "age": "30",
@@ -176,5 +176,47 @@ export const createSurvey = () => {
       pickNum = 4;
     pickRandomList(value, pickNum).forEach((v) => surveyResult.push(v));
   }
+  console.log('createSurvey: ', surveyResult);
   return surveyResult; //14개의 설문 반환
+}
+
+// const surveyCoef = [2.06, 0.88, 2.5, 2, 5, 1.55];
+const coefs = [0.879583, 1.547087, 2.059342, 1.4042];
+
+export interface SurveyResult {
+  totalScore: number,
+  olsResult: number,
+  '경제': number, //0.879583
+  '관계': number, //1.547087
+  '자유': number, //2.059342
+  '감정': number,
+  '삶의 만족도': number,
+}
+
+export const calculateResult = (answer: number[]) => {
+  const result: SurveyResult = {
+    totalScore: 0,
+    olsResult: 0,
+    '경제': 0,
+    '관계': 0,
+    '자유': 0,
+    '감정': 0,
+    '삶의 만족도': 0,
+  };
+  result.totalScore = answer.reduce((prev, cur, i) => {
+    // if (i < 2) result['경제'] += (cur / (2 * surveyCoef[0]));
+    // else if (i < 4) result['관계'] += (cur / (2 * surveyCoef[1]));
+    // else if (i < 6) result['자유'] += (cur / (2 * surveyCoef[2]));
+    // else if (i < 10) result['감정'] += (cur / (4 * surveyCoef[3]));
+    // else result['삶의 만족도'] += (cur / (4 * surveyCoef[4]));
+    if (i < 2) result['경제'] += (cur / (2));
+    else if (i < 4) result['관계'] += (cur / (2));
+    else if (i < 6) result['자유'] += (cur / (2));
+    else if (i < 10) result['감정'] += (cur / (4));
+    else result['삶의 만족도'] += (cur / (4));
+    return prev + cur;
+  }, 0);
+  result.olsResult = (result['경제']/10 * coefs[0] + result['관계']/10 * coefs[1] + result['자유']/10 * coefs[2] + coefs[3])*10;
+  console.table(result);
+  return result;
 }

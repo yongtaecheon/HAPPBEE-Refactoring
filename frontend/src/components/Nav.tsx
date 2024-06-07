@@ -7,7 +7,7 @@ export default function Nav() {
   const location = useLocation();
   const lists = useMemo(() => {
     return {
-      links: ['/home', '/chat', '/survey/0', '/hospital'],
+      links: ['/home', '/chat', '/survey', '/hospital'],
       icons: ['home', 'sms', 'equalizer', 'local_hospital'],
     }
   }, []);

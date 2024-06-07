@@ -1,13 +1,14 @@
+@import './palette.scss';
 nav {
   width:100%;
-  background-color: #fef5ea;
-  border-top: 1px solid #1b1b1b35;
+  background-color: $white;
+  border-top: 1px solid $shadowborder;
   a {
     text-decoration: none;
-    color: #06142e;
+    color: $grey;
     :hover{
       transition: 0.3s;
-      color: #f39f5a;
+      color: $shadowborder;
     }
   }
   ul{
@@ -22,7 +23,7 @@ nav {
         font-size: 1em;
       }
       .selected{
-        color: #f39f5a;
+        color: $black;
       }
     }
   }
@@ -31,14 +32,3 @@ nav {
 .material-symbols-outlined{
   font-size: clamp(10px, 7vw, 50px);
 }
-
-// @media screen and (max-width: 768px) and (max-height: 932px) {
-//   nav{
-//     position: fixed;
-//     z-index: 1;
-//     bottom: 0;
-//   }
-//   .material-symbols-outlined {
-//     font-size: 8vw;
-//   }
-// }

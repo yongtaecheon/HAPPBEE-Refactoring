@@ -26,11 +26,12 @@ function HospitalList() {
       });
     await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}`, { //카카오맵 주소 API GET
       headers: {
-        'Authorization': 'KakaoAK aa240f1a2a04cc185f5a260094c7ba3f'
+        'Authorization': `KakaoAK ${import.meta.env.VITE_KAKAO_API_KEY}`
         }
-      }).then(res => {
-        location = res.data.documents[0].address.address_name.split(' ')[2];
-      });
+    }).then(res => {
+      location = res.data.documents[0].address.address_name.split(' ')[2];
+      console.log('location:', location);
+    });
     return await axios.get(`/api/hospital/${location}`).then(res => res.data); // 백엔드 웹크롤링 결과 GET
   }
 
@@ -45,7 +46,7 @@ function HospitalList() {
           <div className='hospital' key={v.name}>
             <h2>{v.name}</h2>
             <span>{v.address}</span>
-            <p><strong>{v.phone_number}</strong></p>
+            <p>℡ <strong>{v.phone_number}</strong></p>
           </div>);
       })
     )

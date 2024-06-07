@@ -21,13 +21,16 @@ export default function Chat() {
   const [chatText, setChatText] = useState<string>('');
   const dispatch = useAppDispatch();
 
-  const postChat = () => axios.post('/api/chat', { text: chatText }).then(res => res.data);
+  const postChat = () => axios.post('/api/chat', { count:chat.length, text: chatText }).then(res => res.data).catch(e=>console.log(e));
   const { mutate: mutateChat, isPending } = useMutation({
     mutationKey: ['chat'],
     mutationFn: postChat,
     onSuccess: (res) => {
       dispatch(addAiChat(res));
       dispatch(increaseChatCount());
+    },
+    onError: (res) => {
+      console.log(res)
     }
   })
 
@@ -86,12 +89,12 @@ export default function Chat() {
   return (
     <section className='chat'>
       <article className='chat-container'>
-        <div className='chatbox-ai'>안녕😸 나랑 편하게 얘기해보자.</div>
+        <div className='chatbox-ai'>안녕😸 나랑 편하게 얘기해보자.<br/>힘든 일이 있다면 나에게 편하게 얘기해줘.<br/>위로해줄게!</div>
         {renderChats()}
         <div ref={messageEndRef}></div>
       </article>
       <div className='chat-input'>
-        <input placeholder='햅비냥과 대화해보세요.' value={chatText} ref={inputRef} onChange={(e)=>setChatText(e.target.value)} onKeyDown={(e)=>handleKeyDown(e)}></input>
+        <input placeholder='햅비와 대화해보세요.' value={chatText} ref={inputRef} onChange={(e)=>setChatText(e.target.value)} onKeyDown={(e)=>handleKeyDown(e)}></input>
         <button onClick={handleChatButton}><span className='material-symbols-outlined'>arrow_upward</span></button>
       </div>
     </section>

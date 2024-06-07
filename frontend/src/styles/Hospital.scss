@@ -3,7 +3,7 @@
 .hospital-container{
   overflow: scroll;
   display: grid;
-  gap: 1vw;
+  gap: 2vw;
   padding: 3vw;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -14,8 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
-  box-shadow: 1px 1px 5px #0000005c;
+  background-color: $white;
+  box-shadow: 1px 1px 5px $shadowborder;
   padding: 1em;
   text-wrap: balance;
   border-radius: 50px;
@@ -30,23 +30,16 @@
 }
 
 .hospital:nth-child(1){
-  background-color: #2b2653;
-  color: #f0f0f0;
+  background-color: $lightblack;
+  color: $white;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-end: 1;
-  button{
-    background-color: #f0f0f0;
-    color: #2b2653;
-  }
-  button:hover{
-    background-color: #b6adff;
-  }
 }
 .hospital:nth-child(2n){
-  background-color: $orange;
+  background-color: $peach;
 }
 
 .hospital:nth-child(3n){
-  background-color: $red;
+  background-color: $lightblue;
 }
