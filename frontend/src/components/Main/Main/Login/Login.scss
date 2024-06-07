@@ -1,0 +1,19 @@
+@import "../../../../styles/palette.scss";
+
+.login-container {
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  background-color: $white;
+  input {
+    height: 4vh;
+    width: 80vw;
+    max-width: 650px;
+    margin-block: 1vw;
+    border-radius: 10px;
+    border: 1px solid $shadowborder;
+  }
+  box-shadow: 1px 1px 5px $shadowborder;
+}

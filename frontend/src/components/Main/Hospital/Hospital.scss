@@ -1,0 +1,45 @@
+@import "../../../styles/palette.scss";
+
+.hospital-container {
+  overflow: scroll;
+  display: grid;
+  gap: 2vw;
+  padding: 3vw;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.hospital {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  box-shadow: 1px 1px 5px $shadowborder;
+  padding: 1em;
+  text-wrap: balance;
+  border-radius: 50px;
+  &-loading {
+    padding: 2em;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.hospital:nth-child(1) {
+  background-color: $lightblack;
+  color: $white;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-end: 1;
+}
+.hospital:nth-child(2n) {
+  background-color: $peach;
+}
+
+.hospital:nth-child(3n) {
+  background-color: $lightblue;
+}

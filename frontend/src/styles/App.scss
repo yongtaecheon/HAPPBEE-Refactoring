@@ -1,67 +1,69 @@
-@import './palette.scss';
+@import "./palette.scss";
 body {
   display: grid;
   place-items: center;
   text-align: center;
-  margin:0;
+  margin: 0;
   height: 100vh;
   overflow: hidden;
   background-color: $white;
-  font-size: clamp(12px, calc(0.26vw + 11.08px), 16px); //360px view: 12px / 1920px view: 16px
-  // font-size: 16px;
+  font-size: clamp(
+    12px,
+    calc(0.26vw + 11.08px),
+    16px
+  ); //360px view: 12px / 1920px view: 16px
 }
 
-#root{
-  font-family: 'Poppins', "IBM Plex Sans KR", sans-serif;
+#root {
+  font-family: "Poppins", "IBM Plex Sans KR", sans-serif;
   font-weight: 400;
   color: $black;
   font-style: normal;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width:768px;
-  max-height:932px;
-  width:100vw;
-  height:100vh;
+  max-width: 768px;
+  max-height: 932px;
+  width: 100vw;
+  height: 100vh;
 }
 
-main{
-  display:flex;
+main {
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: $lightgrey;
   height: 100%;
-  width:100%;
-  overflow: scroll;
-  // padding-block:10vh;
+  width: 100%;
+  overflow-y: scroll;
 }
 
-section{
-  height:100%;
+section {
+  height: 100%;
 }
 
-button{
+button {
   font-family: "IBM Plex Sans KR", sans-serif;
   border: 0;
   background-color: $black;
   color: $white;
-  margin:1vh;
+  margin: 1vh;
   padding-block: 1vh;
   border-radius: 10px;
   font-size: 1rem;
-  width:150px;
-  // text-wrap: nowrap;
+  width: 150px;
 }
-button:hover, button:focus {
+button:hover,
+button:focus {
   background-color: $lightblack;
   transition: 0.3s;
 }
-button:active{
+button:active {
   background-color: $grey;
   transition: 0.3s;
 }
-img{
+img {
   width: 100%;
 }
 
@@ -75,37 +77,23 @@ img{
 }
 
 @media screen and (min-width: 768px) and (min-height: 932px) {
-  body{
+  body {
     background-color: $shadowborder;
   }
-  #root{
+  #root {
     border-radius: 25px;
     overflow: hidden;
     box-shadow: 1px 1px 10px $shadowborder;
-    background-color:$white;
+    background-color: $white;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 932px) {
-  header{
-    position:fixed;
-    z-index:1;
-    top:0;
-    width: 100%;
-  }
-  nav {
-    position: fixed;
-    z-index: 1;
-    bottom: 0;
-    width: 100%;
-  }
-  main{
-    overflow-y: scroll;
-    // margin-block: 8vh;
-  }
-  section{
-    height: 85%;
-    overflow-y: scroll;
-    // height: 100vh;
-  }
+  // main{
+  //   // overflow-y: scroll;
+  //   // margin-block: 8vh;
+  // }
+  // section{
+  //   // overflow-y: scroll;
+  // }
 }
