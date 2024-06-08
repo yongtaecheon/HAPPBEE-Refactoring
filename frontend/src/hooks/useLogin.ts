@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { setLogin } from "../redux/LoginReducer";
 
 export const useLogin = () => {
-  const [userId, setUserId] = useState<string>("");
-  const [userPassword, setUserPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    dispatch(setLogin({ userId, userPassword }));
+    dispatch(setLogin({ username, password }));
     navigate("/home");
   };
 
-  return { userId, setUserId, userPassword, setUserPassword, handleLogin };
+  return { username, setUsername, password, setPassword, handleLogin };
 };

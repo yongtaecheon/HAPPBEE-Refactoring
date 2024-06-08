@@ -2,14 +2,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface LoginState {
   isLoggedIn: boolean;
-  userId: string;
-  userPassword: string;
+  username: string;
+  password: string;
 }
 
 const initialState: LoginState = {
   isLoggedIn: false,
-  userId: "",
-  userPassword: "",
+  username: "",
+  password: "",
 };
 
 export const loginSlice = createSlice({
@@ -18,12 +18,12 @@ export const loginSlice = createSlice({
   reducers: {
     setLogin: (
       state: LoginState,
-      action: PayloadAction<{ userId: string; userPassword: string }>
+      action: PayloadAction<{ username: string; password: string }>
     ) => {
       state.isLoggedIn = true;
-      [state.userId, state.userPassword] = [
-        action.payload.userId,
-        action.payload.userPassword,
+      [state.username, state.password] = [
+        action.payload.username,
+        action.payload.password,
       ];
     },
   },

@@ -2,18 +2,18 @@ import { useLogin } from "../../../../hooks/useLogin";
 import "./Login.scss";
 
 export default function Login() {
-  const { userId, setUserId, userPassword, setUserPassword, handleLogin } =
+  const { username, setUsername, password, setPassword, handleLogin } =
     useLogin();
   return (
     <div className="login-container">
       <input
-        value={userId}
-        onChange={() => setUserId(userId)}
-        placeholder="아이디"
+        value={username}
+        onChange={() => setUsername(username)}
+        placeholder="사용자명"
       ></input>
       <input
-        value={userPassword}
-        onChange={() => setUserPassword(userPassword)}
+        value={password}
+        onChange={() => setPassword(password)}
         placeholder="비밀번호"
       ></input>
       <button onClick={handleLogin}>로그인</button>
