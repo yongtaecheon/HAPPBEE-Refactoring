@@ -21,8 +21,10 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @OneToOne(() => CatInfoEntity)
+  @OneToOne(() => CatInfoEntity, (catInfo) => catInfo.user, { eager: true })
+  //eager: true 유저엔티티 로드 자동조인
   @JoinColumn()
+  //OnetoOne은 한 쪽에 JoinColumn() 명시해야 함
   catInfo: CatInfoEntity;
 
   @OneToMany(() => ChatInfoEntity, (chatInfo) => chatInfo.user)
