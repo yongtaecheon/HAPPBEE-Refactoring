@@ -1,5 +1,9 @@
 import { DataSource, Repository } from 'typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserEntity } from './entities/user.entity';
 import { UserDto } from './dto/user.dto';
 import { CatInfoEntity } from './entities/catInfo.entity';
@@ -40,14 +44,23 @@ export class UserRepository {
     console.log('catInfo : ', catInfo);
     return user;
   }
+
+  async authPassword(userDto: UserDto) {
+    const user = await this.findOneByUsername(userDto.username);
+    if (user.password !== userDto.password)
+      throw new UnauthorizedException('비밀번호가 틀렸습니다.');
+    return user;
+  }
+
+  //유저 이름으로 해당 UserEntity, CatEntity 찾기
   async findOneByUsername(username: string) {
-    //유저이름으로 찾기
     const result = await this.userRepository.findOneBy({ username });
     console.log('findOneByUsername : ', result);
     if (!result) throw new NotFoundException();
     return result;
   }
 
+  //유저이름으로 정보 모두 찾기
   async findAllInfoByUsername(username: string) {
     const user = await this.findOneByUsername(username);
     const chatInfo = await this.chatInfoRepository.find({

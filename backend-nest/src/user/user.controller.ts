@@ -6,32 +6,65 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Request, Response } from 'express';
+import { AuthService } from './auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
-  @Post('/signin') //회원가입
-  signIn(@Body() userDto: UserDto) {
-    return this.userService.signIn(userDto);
+  //회원가입
+  //유저네임 중복확인 후 DB에 유저 생성
+  @Post('/signin')
+  async signIn(@Body() userDto: UserDto): Promise<{ username: string }> {
+    return await this.userService.signIn(userDto);
   }
 
-  @Post('/login') //로그인
-  login(@Body() userDto: UserDto) {
-    return this.userService.login(userDto);
-  }
-
+  //해당 유저 존재하면 username 반환
   @Get('/exist/:username')
-  isUserExsit(@Param('username') username: string) {
+  isUserExsit(
+    @Param('username') username: string,
+  ): Promise<{ username: string }> {
     return this.userService.isUserExist(username);
   }
 
-  @Get('/info/:username')
-  findAllInfoByUsername(@Param('username') username: string) {
+  //로그인
+  //비밀번호 검증 후 토큰 발행
+  @Post('/login')
+  async login(
+    @Body() userDto: UserDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<{ username: string }> {
+    return this.authService.publishTokens(
+      (await this.userService.authPassword(userDto)).username,
+      res,
+    );
+  }
+
+  //로그아웃
+  //토큰 삭제
+  @Get('/logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    return this.authService.clearTokens(res);
+  }
+
+  //유저정보 가져오기
+  //토큰 검증 후 토큰 내부의 username을 통해 DB 탐색
+  @Get('/info')
+  findAllInfoByUsername(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const username = this.authService.authTokens(req, res).username;
     return this.userService.findAllInfoByUsername(username);
   }
 

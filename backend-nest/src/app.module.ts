@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UserModule } from './user/user.module';
       // logging: true, // - orm 사용시 로그 남기기
       dropSchema: true, // - 구동시 해당 테이블 삭제 synchronize와 동시 사용
     }),
+    ConfigModule.forRoot({ isGlobal: true }),
     UserModule,
   ],
 })

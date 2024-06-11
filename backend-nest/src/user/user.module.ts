@@ -7,6 +7,7 @@ import { UserEntity } from './entities/user.entity';
 import { SurveyInfoEntity } from './entities/surveyInfo.entity';
 import { CatInfoEntity } from './entities/catInfo.entity';
 import { ChatInfoEntity } from './entities/chatInfo.entity';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { ChatInfoEntity } from './entities/chatInfo.entity';
     ]),
   ],
   controllers: [UserController],
-  providers: [UserService, UserRepository],
+  providers: [AuthService, UserService, UserRepository],
 })
 export class UserModule {}

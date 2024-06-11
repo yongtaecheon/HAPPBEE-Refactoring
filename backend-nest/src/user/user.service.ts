@@ -6,6 +6,8 @@ import { UserRepository } from './user.repository';
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
+
+  //회원가입
   async signIn(userDto: UserDto) {
     try {
       await this.userRepository.findOneByUsername(userDto.username);
@@ -16,19 +18,22 @@ export class UserService {
       };
     }
     //유저가 존재할 경우 bad request
-    throw new BadRequestException();
+    throw new BadRequestException('해당 유저가 이미 존재합니다.');
   }
 
-  login(userDto: UserDto) {
-    return 'login';
+  //로그인시 비밀번호 검증
+  async authPassword(userDto: UserDto) {
+    return {
+      username: (await this.userRepository.authPassword(userDto)).username,
+    };
   }
 
-  async findAllInfoByUsername(username: string) {
+  findAllInfoByUsername(username: string) {
     return this.userRepository.findAllInfoByUsername(username);
   }
 
+  //해당 유저 존재하면 username 반환
   async isUserExist(username: string) {
-    //존재하면 유저네임 리턴
     return {
       username: (await this.userRepository.findOneByUsername(username))
         .username,
