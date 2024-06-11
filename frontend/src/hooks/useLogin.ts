@@ -20,12 +20,19 @@ export const useLogin = () => {
   const { mutate: mutateLogin } = useMutation({
     mutationKey: ["login"],
     mutationFn: postLogin,
+    onSuccess: () => {
+      dispatch(setLogin({ username, password }));
+      navigate("/home");
+    },
+    onError: () => {
+      alert("해당 유저가 존재하지 않거나 비밀번호가 틀렸습니다.");
+    },
   });
 
   const handleLogin = () => {
-    mutateLogin();
-    dispatch(setLogin({ username, password }));
-    navigate("/home");
+    if (username === "") alert("사용자명을 입력해 주세요.");
+    else if (password === "") alert("비밀번호를 입력해 주세요");
+    else mutateLogin();
   };
 
   return { username, setUsername, password, setPassword, handleLogin };

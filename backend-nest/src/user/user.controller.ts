@@ -31,10 +31,8 @@ export class UserController {
 
   //해당 유저 존재하면 username 반환
   @Get('/exist/:username')
-  isUserExsit(
-    @Param('username') username: string,
-  ): Promise<{ username: string }> {
-    return this.userService.isUserExist(username);
+  async isUsernameAvailable(@Param('username') username: string) {
+    return await this.userService.isUsernameAvailable(username);
   }
 
   //로그인
@@ -50,9 +48,15 @@ export class UserController {
     );
   }
 
+  //토큰을 통한 자동 로그인 요청
+  @Post('/login/token')
+  tokenLogin(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    return this.authService.authTokens(req, res);
+  }
+
   //로그아웃
   //토큰 삭제
-  @Get('/logout')
+  @Delete('/logout')
   logout(@Res({ passthrough: true }) res: Response) {
     return this.authService.clearTokens(res);
   }
@@ -60,12 +64,12 @@ export class UserController {
   //유저정보 가져오기
   //토큰 검증 후 토큰 내부의 username을 통해 DB 탐색
   @Get('/info')
-  findAllInfoByUsername(
+  async findAllInfoByUsername(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const username = this.authService.authTokens(req, res).username;
-    return this.userService.findAllInfoByUsername(username);
+    return await this.userService.findAllInfoByUsername(username);
   }
 
   @Patch(':id')

@@ -56,7 +56,6 @@ export class UserRepository {
   async findOneByUsername(username: string) {
     const result = await this.userRepository.findOneBy({ username });
     console.log('findOneByUsername : ', result);
-    if (!result) throw new NotFoundException();
     return result;
   }
 

@@ -1,8 +1,10 @@
 import { useLocation } from "react-router-dom";
 import "./Header.scss";
+import { useLogout } from "../../hooks/useLogout";
 
 export default function Header() {
   const location = useLocation();
+  const { isLoggedIn, handleLogout } = useLogout();
   const pathname = () => {
     const links = ["/home", "/chat", "/survey", "/hospital"];
     const name = ["Home", "Chat", "Happbee Score", "Hospitals"];
@@ -10,10 +12,18 @@ export default function Header() {
       if (location.pathname.startsWith(links[i])) return name[i];
     }
   };
+
   return (
     <header>
-      <h1>HAPPBEE</h1>
-      <h2>{pathname()}</h2>
+      <div>
+        <h1>HAPPBEE</h1>
+        <h2>{pathname()}</h2>
+      </div>
+      {isLoggedIn && (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <a onClick={handleLogout}>로그아웃</a>
+        </div>
+      )}
     </header>
   );
 }

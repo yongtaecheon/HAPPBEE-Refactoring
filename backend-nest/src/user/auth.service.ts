@@ -41,6 +41,7 @@ export class AuthService {
   clearTokens(res: Response) {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
+    return '성공적으로 로그아웃 하였습니다.';
   }
 
   //액세스 토큰 검증

@@ -26,8 +26,11 @@ export const loginSlice = createSlice({
         action.payload.password,
       ];
     },
+    setLogout: (state: LoginState) => {
+      Object.assign(state, initialState);
+    },
   },
 });
 
-export const { setLogin } = loginSlice.actions;
+export const { setLogin, setLogout } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -9,10 +9,10 @@ export class UserService {
 
   //회원가입
   async signIn(userDto: UserDto) {
-    try {
-      await this.userRepository.findOneByUsername(userDto.username);
-    } catch (e) {
-      //유저가 존재하지 않을 때 삽입
+    //유저가 존재하지 않을 때 삽입
+    if (
+      (await this.userRepository.findOneByUsername(userDto.username)) === null
+    ) {
       return {
         username: (await this.userRepository.createUser(userDto)).username,
       };
@@ -32,12 +32,11 @@ export class UserService {
     return this.userRepository.findAllInfoByUsername(username);
   }
 
-  //해당 유저 존재하면 username 반환
-  async isUserExist(username: string) {
-    return {
-      username: (await this.userRepository.findOneByUsername(username))
-        .username,
-    };
+  //해당 사용자명 존재하는지 확인
+  async isUsernameAvailable(username: string) {
+    if ((await this.userRepository.findOneByUsername(username)) === null)
+      return true;
+    return false;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
