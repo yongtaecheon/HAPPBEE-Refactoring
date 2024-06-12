@@ -45,7 +45,12 @@ export class UserRepository {
     });
     console.log('chatInfo : ', chatInfo);
     console.log('catInfo : ', surveyInfo);
-    return { ...user, catInfo, chatInfo, surveyInfo };
+    return {
+      ...user,
+      catInfo: catInfo[0],
+      chatInfo,
+      surveyInfo: surveyInfo,
+    };
   }
   //햅비냥 정보 업데이트
   async updateCatInfo(username: string, catInfoDto: CatInfoDto) {

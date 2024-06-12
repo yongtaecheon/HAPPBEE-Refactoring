@@ -73,9 +73,9 @@ const barOptions = {
 
 export default function SurveyChart() {
   const survey = useAppSelector((state) => state.survey);
-  const { totalScore, olsResult, ...chartResult } = survey.result;
+  const { totalScore, olsResult, ...chartResult } = survey.result[survey.result.length - 1];
   const radarData = {
-    labels: Object.keys(chartResult),
+    labels: ["경제", "관계", "자유", "감정", "삶의 만족도"],
     datasets: [
       {
         data: Object.values(chartResult),

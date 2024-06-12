@@ -12,9 +12,21 @@ import { SurveyInfoDto } from './dto/surveyInfo.dto';
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  findAllInfoByUsername(username: string) {
+  async findAllInfoByUsername(username: string) {
     try {
-      return this.userRepository.findAllInfoByUsername(username);
+      const userInfo =
+        await this.userRepository.findAllInfoByUsername(username);
+      delete userInfo.id;
+      delete userInfo.password;
+      delete userInfo.catInfo.id;
+      delete userInfo.catInfo.user;
+      userInfo.chatInfo.forEach((v) => {
+        delete v.user;
+      });
+      userInfo.surveyInfo.forEach((v) => {
+        delete v.user;
+      });
+      return userInfo;
     } catch (e) {
       throw new NotFoundException('해당 사용자가 존재하지 않습니다.');
     }
@@ -26,6 +38,7 @@ export class UserService {
     username: string,
     dto: CatInfoDto | ChatInfoDto | SurveyInfoDto,
   ) {
+    console.log(dto);
     if (info === 'cat')
       return this.userRepository.updateCatInfo(username, dto as CatInfoDto);
     else if (info === 'chat')

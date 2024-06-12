@@ -2,19 +2,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { finishSurvey, setSurveyAnswer } from "../../../redux/SurveyReducer";
 import "./Survey.scss";
+import { useSurveySave } from "../../../hooks/Survey/useSurveySave";
 
 function SurveyContent({ id }: { id: number }) {
   const survey = useAppSelector((state) => state.survey);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { mutateSurveySave } = useSurveySave();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSurveyBtn = (e: any) => {
+  const handleSurveyBtn = async (e: any) => {
     console.log(`clicked ${e.target.value}`);
     dispatch(setSurveyAnswer({ idx: id, value: +e.target.value }));
     if (id < 13) navigate(`/survey/${id + 1}`);
     else {
-      dispatch(finishSurvey());
+      await new Promise((resolve) => resolve(dispatch(finishSurvey()))).then(() => mutateSurveySave());
       navigate("/survey");
     }
   };
@@ -23,12 +25,7 @@ function SurveyContent({ id }: { id: number }) {
     const arr = [];
     for (let i = 1; i <= 10; i++) {
       arr.push(
-        <button
-          className="survey-btn"
-          key={i}
-          value={i}
-          onClick={(e) => handleSurveyBtn(e)}
-        >
+        <button className="survey-btn" key={i} value={i} onClick={(e) => handleSurveyBtn(e)}>
           {i}
         </button>
       );
@@ -62,8 +59,7 @@ function InvalidSurveyPage() {
 export default function SurveyList() {
   const params = useParams();
   //validate params
-  if (params.id === undefined || +params.id < 0 || +params.id > 13)
-    return <InvalidSurveyPage />;
+  if (params.id === undefined || +params.id < 0 || +params.id > 13) return <InvalidSurveyPage />;
   const id = +params.id;
   return (
     <section className="survey-container">

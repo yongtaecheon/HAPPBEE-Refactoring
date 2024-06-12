@@ -1,34 +1,41 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type Chat = string[];
+export interface Chat {
+  id: number;
+  userReq: string;
+  aiRes: string;
+}
 
 interface ChatState {
-  user: Chat,
-  ai: Chat,
-  length: number,
+  chats: Chat[];
+  length: number;
 }
 
 const initialState: ChatState = {
-  user: [],
-  ai: [],
+  chats: [],
   length: 0,
-}
+};
 
 export const chatSlice = createSlice({
-  name: 'chat',
+  name: "chats",
   initialState,
   reducers: {
+    setChatInitialState: (state, action: PayloadAction<Chat[]>) => {
+      action.payload.forEach((v) => state.chats.push(v));
+      state.length = action.payload.length;
+      console.log("chatReducer : ", { chats: [...state.chats], length: state.length });
+    },
     addUserChat: (state: ChatState, action: PayloadAction<string>) => {
-      state.user.push(action.payload);
+      state.chats.push({ id: 0, userReq: action.payload, aiRes: "" });
       state.length++;
       // console.log('ChatReducer : ', state.user[state.length - 1]);
     },
     addAiChat: (state: ChatState, action: PayloadAction<string>) => {
-      state.ai.push(action.payload);
+      state.chats[state.length - 1].aiRes = action.payload;
       // console.log('ChatReducer : ', state.ai[state.length - 1]);
-    }
-  }
+    },
+  },
 });
 
-export const { addUserChat, addAiChat } = chatSlice.actions;
+export const { setChatInitialState, addUserChat, addAiChat } = chatSlice.actions;
 export default chatSlice.reducer;

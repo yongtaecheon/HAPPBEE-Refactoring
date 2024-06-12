@@ -22,22 +22,18 @@ function HospitalList() {
   const fetchHospitalWithCurLocation = async () => {
     let location: string = "서울 강남";
     let [lat, lon] = [0, 0];
-    await new Promise((resolve: PositionCallback) =>
-      navigator.geolocation.getCurrentPosition(resolve)
-    ) //비동기 Geolocation API 정보 - 위도/경도 GET
+    await new Promise((resolve: PositionCallback) => navigator.geolocation.getCurrentPosition(resolve))
+      //비동기 Geolocation API 정보 - 위도/경도 GET
       .then((pos: GeolocationPosition) => {
         [lat, lon] = [pos.coords.latitude, pos.coords.longitude];
       });
     await axios
-      .get(
-        `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}`,
-        {
-          //카카오맵 주소 API GET
-          headers: {
-            Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_API_KEY}`,
-          },
-        }
-      )
+      .get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}`, {
+        //카카오맵 주소 API GET
+        headers: {
+          Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_API_KEY}`,
+        },
+      })
       .then((res) => {
         location = res.data.documents[0].address.address_name.split(" ")[2];
         console.log("location:", location);

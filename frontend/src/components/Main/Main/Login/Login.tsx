@@ -1,18 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../../../../hooks/useLogin";
 import "./Login.scss";
+import { useLogin } from "../../../../hooks/Login/useLogin";
 
 export default function Login() {
-  const { username, setUsername, password, setPassword, handleLogin } =
-    useLogin();
+  const { username, setUsername, password, setPassword, handleLogin } = useLogin();
   const navigate = useNavigate();
   return (
     <div className="login-container">
-      <input
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="사용자명"
-      ></input>
+      <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="사용자명"></input>
       <input
         type="password"
         value={password}

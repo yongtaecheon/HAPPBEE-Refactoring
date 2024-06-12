@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "./Header.scss";
-import { useLogout } from "../../hooks/useLogout";
+import { useLogout } from "../../hooks/Login/useLogout";
 
 export default function Header() {
   const location = useLocation();

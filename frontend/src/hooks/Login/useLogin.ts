@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAppDispatch } from "../redux/store";
 import { useNavigate } from "react-router-dom";
-import { setLogin } from "../redux/LoginReducer";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { useAppDispatch } from "../../redux/store";
+import { setLogin } from "../../redux/LoginReducer";
 
 export const useLogin = () => {
   const [username, setUsername] = useState<string>("");
@@ -12,10 +12,7 @@ export const useLogin = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const postLogin = () =>
-    axios
-      .post("/auth/login", { username, password })
-      .then((res) => console.log(res));
+  const postLogin = () => axios.post("/auth/login", { username, password }).then((res) => console.log(res));
 
   const { mutate: mutateLogin } = useMutation({
     mutationKey: ["login"],

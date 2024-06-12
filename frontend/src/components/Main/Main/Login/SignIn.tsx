@@ -1,4 +1,4 @@
-import { useSignIn } from "../../../../hooks/useSignIn";
+import { useSignIn } from "../../../../hooks/Login/useSignIn";
 
 export default function SignIn() {
   const {
@@ -15,11 +15,7 @@ export default function SignIn() {
   } = useSignIn();
   return (
     <div className="login-container">
-      <input
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="사용자명"
-      ></input>
+      <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="사용자명"></input>
       <span>{checkUsernameText}</span>
       <button onClick={handleCheckUsername}>중복확인</button>
       <input

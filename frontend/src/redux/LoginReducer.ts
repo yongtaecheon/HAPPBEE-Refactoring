@@ -16,15 +16,10 @@ export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    setLogin: (
-      state: LoginState,
-      action: PayloadAction<{ username: string; password: string }>
-    ) => {
+    setLogin: (state: LoginState, action: PayloadAction<{ username: string; password: string }>) => {
       state.isLoggedIn = true;
-      [state.username, state.password] = [
-        action.payload.username,
-        action.payload.password,
-      ];
+      [state.username, state.password] = [action.payload.username, action.payload.password];
+      console.log("loginReducer : ", { username: state.username });
     },
     setLogout: (state: LoginState) => {
       Object.assign(state, initialState);

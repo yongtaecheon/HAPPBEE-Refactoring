@@ -2,8 +2,7 @@ import "./styles/App.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAppSelector } from "./redux/store";
-import { useToken } from "./hooks/useToken";
-
+import { useToken } from "./hooks/Login/useToken";
 import Nav from "./components/Nav/Nav";
 import Main from "./components/Main/Main/Main";
 import Home from "./components/Main/Home/Home";
@@ -14,9 +13,9 @@ import Hostpital from "./components/Main/Hospital/Hostpital";
 import Survey from "./components/Main/Survey/Survey";
 import SurveyList from "./components/Main/Survey/SurveyList";
 import SignIn from "./components/Main/Main/Login/SignIn";
+import { useUserInfo } from "./hooks/Login/useUserInfo";
 
 function MainContent() {
-  useToken();
   return (
     <main>
       <Routes>
@@ -36,6 +35,8 @@ function MainContent() {
 export default function App() {
   const queryClient = new QueryClient();
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
+  useToken();
+  useUserInfo();
   return (
     <>
       <BrowserRouter>
