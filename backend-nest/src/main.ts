@@ -7,7 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
     new ValidationPipe({
-      forbidNonWhitelisted: true, // DTO에 존재하지 않는 property 전달 시 Exception
+      whitelist: true, //DTO존재하지 않는 Property 전달 시 자동 제거
+      // forbidNonWhitelisted: true, // DTO에 존재하지 않는 property 전달 시 Exception
       transform: true, //controller URL 파라미터 타입 변경
     }),
   );

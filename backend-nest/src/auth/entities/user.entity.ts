@@ -6,9 +6,9 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ChatInfoEntity } from './chatInfo.entity';
 import { CatInfoEntity } from './catInfo.entity';
-import { SurveyInfoEntity } from './surveyInfo.entity';
+import { ChatInfoEntity } from 'src/user/entities/chatInfo.entity';
+import { SurveyInfoEntity } from 'src/user/entities/surveyInfo.entity';
 
 @Entity()
 export class UserEntity {
@@ -21,7 +21,7 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @OneToOne(() => CatInfoEntity, (catInfo) => catInfo.user, { eager: true })
+  @OneToOne(() => CatInfoEntity, (catInfo) => catInfo.user, { eager: false })
   //eager: true 유저엔티티 로드 자동조인
   @JoinColumn()
   //OnetoOne은 한 쪽에 JoinColumn() 명시해야 함

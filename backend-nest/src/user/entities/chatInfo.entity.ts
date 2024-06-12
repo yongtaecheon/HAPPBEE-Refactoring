@@ -1,5 +1,5 @@
+import { UserEntity } from 'src/auth/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { UserEntity } from './user.entity';
 
 @Entity()
 export class ChatInfoEntity {

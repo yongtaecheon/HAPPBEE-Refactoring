@@ -27,10 +27,6 @@ export class AuthService {
     };
   }
 
-  findAllInfoByUsername(username: string) {
-    return this.authRepository.findAllInfoByUsername(username);
-  }
-
   //해당 사용자명 존재하는지 확인
   async isUsernameAvailable(username: string) {
     if ((await this.authRepository.findOneByUsername(username)) === null)

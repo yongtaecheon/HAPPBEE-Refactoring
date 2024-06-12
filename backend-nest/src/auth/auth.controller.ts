@@ -58,15 +58,4 @@ export class AuthController {
   logout(@Res({ passthrough: true }) res: Response) {
     return this.tokenService.clearTokens(res);
   }
-
-  //유저정보 가져오기
-  //토큰 검증 후 토큰 내부의 username을 통해 DB 탐색
-  @Get('/info')
-  async findAllInfoByUsername(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const username = this.tokenService.authTokens(req, res).username;
-    return await this.authService.findAllInfoByUsername(username);
-  }
 }
