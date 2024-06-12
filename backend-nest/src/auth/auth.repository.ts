@@ -1,11 +1,7 @@
 import { DataSource, Repository } from 'typeorm';
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserEntity } from './entities/user.entity';
-import { UserDto } from './dto/user.dto';
+import { AuthDto } from './auth.dto';
 import { CatInfoEntity } from './entities/catInfo.entity';
 import { ChatInfoEntity } from './entities/chatInfo.entity';
 import { SurveyInfoEntity } from './entities/surveyInfo.entity';
@@ -19,11 +15,11 @@ update: 바꾸고 싶은 특정 필드만 수정
 */
 
 @Injectable()
-export class UserRepository {
+export class AuthRepository {
   private userRepository: Repository<UserEntity>;
   private catInfoRepository: Repository<CatInfoEntity>;
-  private chatInfoRepository: Repository<ChatInfoEntity>;
-  private surveyInfoRepository: Repository<SurveyInfoEntity>;
+  private readonly chatInfoRepository: Repository<ChatInfoEntity>;
+  private readonly surveyInfoRepository: Repository<SurveyInfoEntity>;
 
   constructor(private readonly dataSource: DataSource) {
     this.userRepository = this.dataSource.getRepository(UserEntity);
@@ -31,9 +27,9 @@ export class UserRepository {
     this.chatInfoRepository = this.dataSource.getRepository(ChatInfoEntity);
     this.surveyInfoRepository = this.dataSource.getRepository(SurveyInfoEntity);
   }
-  async createUser(userDto: UserDto) {
+  async createUser(authDto: AuthDto) {
     //유저 생성
-    const user = await this.userRepository.save(userDto);
+    const user = await this.userRepository.save(authDto);
     const catInfo = await this.catInfoRepository.save({
       selectedItem: -1,
       chatCount: 0,
@@ -45,9 +41,9 @@ export class UserRepository {
     return user;
   }
 
-  async authPassword(userDto: UserDto) {
-    const user = await this.findOneByUsername(userDto.username);
-    if (user.password !== userDto.password)
+  async authPassword(authDto: AuthDto) {
+    const user = await this.findOneByUsername(authDto.username);
+    if (user.password !== authDto.password)
       throw new UnauthorizedException('비밀번호가 틀렸습니다.');
     return user;
   }

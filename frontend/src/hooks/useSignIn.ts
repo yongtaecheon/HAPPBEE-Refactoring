@@ -19,7 +19,7 @@ export const useSignIn = () => {
   }, [password, confirmPassword]);
 
   const handleCheckUsername = () => {
-    axios.get(`/user/exist/${username}`).then((res) => {
+    axios.get(`/auth/exist/${username}`).then((res) => {
       console.log(res.data);
       if (res.data) {
         setCheckUsername(true);
@@ -34,7 +34,7 @@ export const useSignIn = () => {
     if (checkUsername === false)
       return alert("사용자명 중복확인이 필요합니다.");
     await axios
-      .post("/user/signin", { username, password })
+      .post("/auth/signin", { username, password })
       .then(() => {
         alert("회원가입이 완료되었습니다.");
         navigate("/");

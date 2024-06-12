@@ -14,7 +14,7 @@ export const useLogin = () => {
 
   const postLogin = () =>
     axios
-      .post("/user/login", { username, password })
+      .post("/auth/login", { username, password })
       .then((res) => console.log(res));
 
   const { mutate: mutateLogin } = useMutation({

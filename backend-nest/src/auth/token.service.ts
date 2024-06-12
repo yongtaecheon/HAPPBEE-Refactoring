@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 
 @Injectable()
-export class AuthService {
+export class TokenService {
   constructor(private readonly configService: ConfigService) {}
 
   //환경변수에서 JWT 시크릿 키 가져오기

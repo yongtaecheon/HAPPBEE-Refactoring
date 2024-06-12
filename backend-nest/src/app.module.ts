@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
       dropSchema: true, // - 구동시 해당 테이블 삭제 synchronize와 동시 사용
     }),
     ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
     UserModule,
   ],
 })

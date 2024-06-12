@@ -8,7 +8,7 @@ export const useLogout = () => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
   const handleLogout = async () => {
-    await axios.delete("/user/logout").then((res) => console.log(res.data));
+    await axios.delete("/auth/logout").then((res) => console.log(res.data));
     dispatch(setLogout());
     navigate("/");
   };

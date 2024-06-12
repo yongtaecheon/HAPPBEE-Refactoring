@@ -7,7 +7,7 @@ import { setLogin } from "../redux/LoginReducer";
 export const useToken = () => {
   const dispatch = useAppDispatch();
   const postTokenLogin = () =>
-    axios.post("/user/login/token").then((res) => {
+    axios.post("/auth/login/token").then((res) => {
       console.log(res.data);
       dispatch(setLogin({ username: res.data.username, password: "" }));
     });
