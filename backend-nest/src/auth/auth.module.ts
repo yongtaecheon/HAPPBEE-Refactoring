@@ -6,8 +6,8 @@ import { TokenService } from './token.service';
 import { AuthController } from './auth.controller';
 import { UserEntity } from './entities/user.entity';
 import { CatInfoEntity } from './entities/catInfo.entity';
-import { ChatInfoEntity } from 'src/user/entities/chatInfo.entity';
-import { SurveyInfoEntity } from 'src/user/entities/surveyInfo.entity';
+import { ChatInfoEntity } from '../user/entities/chatInfo.entity';
+import { SurveyInfoEntity } from '../user/entities/surveyInfo.entity';
 
 @Module({
   imports: [

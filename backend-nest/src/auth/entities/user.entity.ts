@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CatInfoEntity } from './catInfo.entity';
-import { ChatInfoEntity } from 'src/user/entities/chatInfo.entity';
-import { SurveyInfoEntity } from 'src/user/entities/surveyInfo.entity';
+import { ChatInfoEntity } from '../../user/entities/chatInfo.entity';
+import { SurveyInfoEntity } from '../../user/entities/surveyInfo.entity';
 
 @Entity()
 export class UserEntity {

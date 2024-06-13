@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Request, Response } from 'express';
-import { TokenService } from 'src/auth/token.service';
+import { TokenService } from '../auth/token.service';
 import { CatInfoDto } from './dto/catInfo.dto';
 import { ChatInfoDto } from './dto/chatInfo.dto';
 import { SurveyInfoDto } from './dto/surveyInfo.dto';

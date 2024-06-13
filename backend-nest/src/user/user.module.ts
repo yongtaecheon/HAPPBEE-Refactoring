@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { TokenService } from 'src/auth/token.service';
+import { TokenService } from '../auth/token.service';
 import { UserRepository } from './user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from 'src/auth/entities/user.entity';
-import { CatInfoEntity } from 'src/auth/entities/catInfo.entity';
+import { UserEntity } from '../auth/entities/user.entity';
+import { CatInfoEntity } from '../auth/entities/catInfo.entity';
 import { ChatInfoEntity } from './entities/chatInfo.entity';
 import { SurveyInfoEntity } from './entities/surveyInfo.entity';
 
