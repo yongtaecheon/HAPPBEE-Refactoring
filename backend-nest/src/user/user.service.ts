@@ -38,7 +38,7 @@ export class UserService {
     username: string,
     dto: CatInfoDto | ChatInfoDto | SurveyInfoDto,
   ) {
-    console.log(dto);
+    console.log('dto : ', dto);
     if (info === 'cat')
       return this.userRepository.updateCatInfo(username, dto as CatInfoDto);
     else if (info === 'chat')

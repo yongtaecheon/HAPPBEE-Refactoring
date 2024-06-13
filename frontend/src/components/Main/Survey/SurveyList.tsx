@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { finishSurvey, setSurveyAnswer } from "../../../redux/SurveyReducer";
 import "./Survey.scss";
-import { useSurveySave } from "../../../hooks/Survey/useSurveySave";
+import { useSurveySave } from "../../../hooks/useSurveySave";
 
 function SurveyContent({ id }: { id: number }) {
   const survey = useAppSelector((state) => state.survey);
@@ -16,7 +16,7 @@ function SurveyContent({ id }: { id: number }) {
     dispatch(setSurveyAnswer({ idx: id, value: +e.target.value }));
     if (id < 13) navigate(`/survey/${id + 1}`);
     else {
-      await new Promise((resolve) => resolve(dispatch(finishSurvey()))).then(() => mutateSurveySave());
+      await Promise.resolve(dispatch(finishSurvey())).then(() => mutateSurveySave());
       navigate("/survey");
     }
   };

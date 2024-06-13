@@ -4,7 +4,7 @@ import { useLogout } from "../../hooks/Login/useLogout";
 
 export default function Header() {
   const location = useLocation();
-  const { isLoggedIn, handleLogout } = useLogout();
+  const { username, isLoggedIn, handleLogout } = useLogout();
   const pathname = () => {
     const links = ["/home", "/chat", "/survey", "/hospital"];
     const name = ["Home", "Chat", "Happbee Score", "Hospitals"];
@@ -21,7 +21,10 @@ export default function Header() {
       </div>
       {isLoggedIn && (
         <div style={{ display: "flex", alignItems: "center" }}>
-          <a onClick={handleLogout}>로그아웃</a>
+          <span>{username}</span>
+          <a href="/" onClick={handleLogout}>
+            로그아웃
+          </a>
         </div>
       )}
     </header>

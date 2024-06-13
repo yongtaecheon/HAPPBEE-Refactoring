@@ -24,7 +24,7 @@ export class UserRepository {
   //유저 이름으로 해당 UserEntity, CatEntity 찾기
   async findOneByUsername(username: string) {
     const result = await this.userRepository.findOneBy({ username });
-    console.log('findOneByUsername : ', result);
+    // console.log('findOneByUsername : ', result);
     return result;
   }
 
@@ -44,7 +44,7 @@ export class UserRepository {
       relations: { user: true },
     });
     console.log('chatInfo : ', chatInfo);
-    console.log('catInfo : ', surveyInfo);
+    console.log('surveyInfo : ', surveyInfo);
     return {
       ...user,
       catInfo: catInfo[0],
