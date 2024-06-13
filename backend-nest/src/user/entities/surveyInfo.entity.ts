@@ -12,19 +12,19 @@ export class SurveyInfoEntity {
   @Column()
   olsResult: number;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 3 })
   economy: number; //경제
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 3 })
   relationship: number; //관계
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 3 })
   freedom: number; //자유
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 3 })
   emotion: number; //감정
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 3 })
   life: number; //삶의 만족도
 
   @ManyToOne(() => UserEntity, (user) => user.surveyInfo)

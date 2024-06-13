@@ -215,12 +215,13 @@ export const calculateResult = (answer: number[]) => {
     else result.life += cur / 4;
     return prev + cur;
   }, 0);
-  result.olsResult =
+  result.olsResult = Math.round(
     ((result.economy / 10) * coefs[0] +
       (result.relationship / 10) * coefs[1] +
       (result.freedom / 10) * coefs[2] +
       coefs[3]) *
-    10;
+      10
+  );
   console.table(result);
   return result;
 };
