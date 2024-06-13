@@ -14,28 +14,23 @@ function ChatboxLoading() {
 }
 
 function ChatContainer() {
-  const { chat, isPending } = useChat();
-  const renderChats = () => {
-    const arr = [];
-    for (let i = 0; i < chat.length; i++) {
-      console.log(isPending);
-      arr.push(
-        <>
-          <div className="chatbox-user" key={`user ${i}`}>
-            {chat.chats[i].userReq}
+  const { chat } = useChat();
+  const renderChats = chat.chats.map((c, i) => {
+    return (
+      <>
+        <div className="chatbox-user" key={`user ${i}`}>
+          {c.userReq}
+        </div>
+        {i === chat.length - 1 && c.aiRes === "" ? (
+          <ChatboxLoading key={`loading ${i}`} />
+        ) : (
+          <div className="chatbox-ai" key={`ai ${i}`}>
+            {c.aiRes}
           </div>
-          {i === chat.length - 1 && isPending ? (
-            <ChatboxLoading key={`loading ${i}`} />
-          ) : (
-            <div className="chatbox-ai" key={`ai ${i}`}>
-              {chat.chats[i].aiRes}
-            </div>
-          )}
-        </>
-      );
-    }
-    return arr;
-  };
+        )}
+      </>
+    );
+  });
 
   //새로운 채팅 렌더링 시 포커스
   const messageEndRef = useRef<HTMLDivElement | null>(null);
@@ -54,7 +49,7 @@ function ChatContainer() {
           <br />
           위로해줄게!
         </div>
-        {renderChats()}
+        {renderChats}
         <div ref={messageEndRef}></div>
       </article>
     </>

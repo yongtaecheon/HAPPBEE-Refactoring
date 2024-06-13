@@ -186,6 +186,7 @@ export const createSurvey = () => {
 const coefs = [0.879583, 1.547087, 2.059342, 1.4042];
 
 export interface SurveyResult {
+  id: number;
   totalScore: number;
   olsResult: number;
   economy: number; //0.879583
@@ -197,6 +198,7 @@ export interface SurveyResult {
 
 export const calculateResult = (answer: number[]) => {
   const result: SurveyResult = {
+    id: 0,
     totalScore: 0,
     olsResult: 0,
     economy: 0,

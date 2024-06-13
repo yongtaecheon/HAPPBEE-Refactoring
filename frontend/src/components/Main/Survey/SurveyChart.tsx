@@ -73,7 +73,8 @@ const barOptions = {
 
 export default function SurveyChart() {
   const survey = useAppSelector((state) => state.survey);
-  const { totalScore, olsResult, ...chartResult } = survey.result[survey.result.length - 1];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { totalScore, olsResult, id, ...chartResult } = survey.result[survey.result.length - 1];
   const radarData = {
     labels: ["경제", "관계", "자유", "감정", "삶의 만족도"],
     datasets: [

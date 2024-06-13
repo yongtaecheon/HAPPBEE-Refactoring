@@ -28,7 +28,7 @@ export const useChat = () => {
   const { mutateChatSave } = useChatSave();
   const { mutateCatSave } = useCatSave();
 
-  const postChat = async () => await axios.post("/api/chat", { text: chatText });
+  const postChat = () => axios.post("/api/chat", { text: chatText });
 
   const { mutate: mutateChat, isPending } = useMutation({
     mutationKey: ["chat"],
@@ -39,8 +39,8 @@ export const useChat = () => {
       mutateChatSave(); //useChatSave hook 사용
       mutateCatSave(); //useCatSave hook 사용
     },
-    onError: (res) => {
-      console.log(res);
+    onError: (err) => {
+      console.error("useChat 에러", err);
     },
   });
 
